@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './App.css'
+import Quiz from './components/Quiz'
 
 function App() {
   const [questionNumber, setQuestionNumber] = useState(3)
   const [timer, setTimer] = useState(30)
-  console.log(typeof(timer))
-  setInterval(()=>(
-    setTimer(timer-1)
-  ) , 1000)
+  // setInterval(()=>(
+  //   setTimer(timer-1)
+  // ) , 1000)
 
   const moneyListItems = [
     {id : 1 , amount : '$ 10 '},
@@ -29,7 +29,9 @@ function App() {
         <div className="top">
           <div className="timer ">{timer}</div>
           </div>
-          <div className="bottom  ">Qestion & Answers</div>
+          <div className="bottom  ">
+            <Quiz />
+          </div>
       </div>
       <div className="moneypramid h-100 d-flex justify-content-center align-items-center p-2 "> 
       <ul className='moneyList w-100 list-unstyled  '>
