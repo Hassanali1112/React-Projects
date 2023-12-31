@@ -1,0 +1,48 @@
+.app{
+  width: 100%;
+  height: 100vh;
+  background: #4a3838;
+  display: flex;
+}
+.main{
+  width: 75%;
+ display: flex;
+ flex-direction: column; 
+}
+.top{
+  height: 50%;
+  position: relative;
+}
+.timer{
+  border: 2px solid white;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+.bottom{
+  height: 50%;
+}
+.moneypramid{
+  width: 25%;
+  background: #c06f6f; 
+}
+
+.moneyListItem{
+  display: flex;
+  padding: 5px;
+}
+.moneyListItem.active{
+  background: teal; 
+  border-radius: 12px;
+  border: 1px solid rgb(149, 223, 215);
+}
+.moneyListItemNumber{
+  width: 30%;
+}
