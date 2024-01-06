@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Quiz from './components/Quiz'
+import Timer from './components/Timer/Timer'
+import Start from './components/start/Start'
+import useSound from 'use-sound';
+
+
 
 function App() {
-  const [questionNumber, setQuestionNumber] = useState(3)
-  const [timer, setTimer] = useState(30)
-  // setInterval(()=>(
-  //   setTimer(timer-1)
-  // ) , 1000)
-
+  const [questionNumber, setQuestionNumber] = useState(1)
+  const [timeStop, setTimeStop] = useState(false)
+  const [earnedMoney, setEarnedMoney] = useState('$ 0')
+  const [userName, setuserName] = useState(null)
+  
+ 
+ 
   const moneyListItems = [
     {id : 1 , amount : '$ 10 '},
     {id : 2 , amount : '$ 50 '},
@@ -20,22 +26,40 @@ function App() {
     {id : 8 , amount : '$ 50000 '},
     {id : 9 , amount : '$ 75000 '},
     {id : 10 , amount : '$ 100000 '},
-  ].reverse()
+  ].reverse();
+
+  useEffect(()=>{
+
+    questionNumber > 1 && setEarnedMoney(moneyListItems.find((m)=>(m.id === questionNumber-1)).amount)
+    console.clear()
+    console.log(earnedMoney)
+  },[questionNumber,moneyListItems])
 
   return (
     <>
      <div className="app ">
-      <div className="main  ">
+        {
+          userName ? (<>
+          <div className="main ">
+        {
+          timeStop ? <h1 className='timerOverText'>You earned : {earnedMoney}</h1> : ( 
+        <>
         <div className="top">
-          <div className="timer ">{timer}</div>
+          <div className="timer ">
+            <Timer questionNumber={questionNumber} setTimeStop={setTimeStop} />
+          </div>
           </div>
           <div className="bottom  ">
-            <Quiz />
+            <Quiz 
+            setTimeStop={setTimeStop}
+            questionNumber={questionNumber}
+            setQuestionNumber={setQuestionNumber}/>
           </div>
+          </>
+        )}
       </div>
-      <div className="moneypramid h-100 d-flex justify-content-center align-items-center p-2 "> 
+    <div className="moneypramid h-100 d-flex justify-content-center align-items-center p-2 "> 
       <ul className='moneyList w-100 list-unstyled  '>
-
         {
           moneyListItems.map((i)=>(
             <li className={(questionNumber === i.id) ? 'moneyListItem active' : 'moneyListItem'}>
@@ -44,12 +68,12 @@ function App() {
           </li>
           ))
         }
-       
-     
-      
-      </ul>
+       </ul>
       </div>
-     </div>
+          </>) : <Start setuserName={setuserName} />
+        }
+      
+    </div>
     </>
   )
 }
