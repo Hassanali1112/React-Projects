@@ -5,16 +5,12 @@ import Timer from './components/Timer/Timer'
 import Start from './components/start/Start'
 import useSound from 'use-sound';
 
-
-
 function App() {
   const [questionNumber, setQuestionNumber] = useState(1)
   const [timeStop, setTimeStop] = useState(false)
   const [earnedMoney, setEarnedMoney] = useState('$ 0')
   const [userName, setuserName] = useState(null)
-  
- 
- 
+
   const moneyListItems = [
     {id : 1 , amount : '$ 10 '},
     {id : 2 , amount : '$ 50 '},
